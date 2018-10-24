@@ -1,6 +1,7 @@
 package builtin
 
 import (
+	"strconv"
 	. "github.com/yatlabs/bigger"
 	"html/template"
 	"fmt"
@@ -11,6 +12,36 @@ import (
 
 
 func init() {
+
+	Bigger.Helper("percent", Map{
+		"name": "百分比", "text": "百分比",
+		"action": func(val float64) (string) {
+			return fmt.Sprintf("%.2f", val*float64(100))
+		},
+	}, false)
+
+
+	Bigger.Helper("round", Map{
+		"name": "四舍六入", "text": "四舍六入",
+		"action": func(val float64, precisions ...Any) (float64) {
+			
+			pres := []int{}
+			if len(precisions) > 0 {
+				if vv,ok := precisions[0].(int); ok {
+					pres = append(pres, vv)
+				} else if vv,ok := precisions[0].(int64); ok {
+					pres = append(pres, int(vv))
+				} else if vv,ok := precisions[0].(string); ok {
+					if ii,ee := strconv.ParseInt(vv, 10, 64); ee == nil {
+						pres = append(pres, int(ii))
+					}
+				}
+			}
+			
+			return Bigger.Round(val, pres...)
+		},
+	}, false)
+
 
 	Bigger.Helper("raw", Map{
 		"name": "原始输出", "text": "原始输出",
