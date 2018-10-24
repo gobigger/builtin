@@ -23,22 +23,27 @@ func init() {
 
 	Bigger.Helper("round", Map{
 		"name": "四舍六入", "text": "四舍六入",
-		"action": func(val float64, precisions ...Any) (float64) {
-			
-			pres := []int{}
+		"action": func(val float64, precisions ...Any) (string) {
+			precision := 2
+
 			if len(precisions) > 0 {
 				if vv,ok := precisions[0].(int); ok {
-					pres = append(pres, vv)
+					precision = vv
 				} else if vv,ok := precisions[0].(int64); ok {
-					pres = append(pres, int(vv))
+					precision =int(vv)
 				} else if vv,ok := precisions[0].(string); ok {
 					if ii,ee := strconv.ParseInt(vv, 10, 64); ee == nil {
-						pres = append(pres, int(ii))
+						precision =int(ii)
 					}
 				}
 			}
-			
-			return Bigger.Round(val, pres...)
+
+			if precision > 0 {
+				format := fmt.Sprintf("%%0.%vf", precision)
+				return fmt.Sprintf(format, val)
+			}
+
+			return fmt.Sprintf("%f", val)
 		},
 	}, false)
 
