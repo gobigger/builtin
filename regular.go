@@ -7,6 +7,7 @@ import (
 func init() {
 
 	Bigger.Regular(Map{
+		"cipher": `^[0-9A-Fa-f]{40}$`,
 		"number": `^[0-9]+$`,
 		"float": `^[0-9]+$`,
 		"date": []string{

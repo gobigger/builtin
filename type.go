@@ -11,6 +11,37 @@ import (
 
 func init() {
 
+
+
+	Bigger.Type("cipher", Map{
+		"name": "密文", "text": "密文",
+		"valid": func(value Any, config Map) bool {
+			if value == nil {
+				return false
+			}
+			switch v := value.(type) {
+			case string: {
+				if v == "" {
+					return false
+				}
+			}
+			}
+			return true
+		},
+		"value": func(value Any, config Map) Any {
+			switch v := value.(type) {
+			case string:
+				if Bigger.Match(v, "cipher") {
+					return v
+				} else {
+					return Cipher(v)
+				}
+			}
+			return fmt.Sprintf("%v", value)
+		},
+	}, false)
+
+
 	Bigger.Type("any", Map{
 		"name": "任意类型", "text": "任意类型",
 		"valid": func(value Any, config Map) bool {
