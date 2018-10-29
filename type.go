@@ -1,7 +1,7 @@
 package builtin
 
 import (
-	. "github.com/yatlabs/bigger"
+	. "github.com/gobigger/bigger"
 	"time"
 	"fmt"
 	"strings"

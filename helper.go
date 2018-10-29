@@ -2,7 +2,7 @@ package builtin
 
 import (
 	"strconv"
-	. "github.com/yatlabs/bigger"
+	. "github.com/gobigger/bigger"
 	"html/template"
 	"fmt"
 	"strings"

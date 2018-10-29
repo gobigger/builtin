@@ -2,7 +2,7 @@ package builtin
 
 import (
 	"encoding/base64"
-	. "github.com/yatlabs/bigger"
+	. "github.com/gobigger/bigger"
 )
 
 func init() {
