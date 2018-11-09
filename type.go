@@ -1146,6 +1146,11 @@ func init() {
 			case []string: {
 				vals = v
 			}
+			case []Any: {
+				for _,va := range v {
+					vals = append(vals, fmt.Sprintf("%v", va))
+				}
+			}
 			default:
 				vals = append(vals, fmt.Sprintf("%v", v))
 			}
@@ -1198,6 +1203,11 @@ func init() {
 			}
 			case []string: {
 				vals = v
+			}
+			case []Any: {
+				for _,va := range v {
+					vals = append(vals, fmt.Sprintf("%v", va))
+				}
 			}
 			default:
 				vals = append(vals, fmt.Sprintf("%v", v))
